@@ -26,8 +26,6 @@ EntryPopup::~EntryPopup()
 
 void EntryPopup::setWidget(const QSharedPointer<QWidget> &p_widget)
 {
-    Q_ASSERT(p_widget);
-
     if (p_widget == m_widget) {
         return;
     }
@@ -36,9 +34,11 @@ void EntryPopup::setWidget(const QSharedPointer<QWidget> &p_widget)
         takeWidget(m_widget.data());
     }
 
-    layout()->addWidget(p_widget.data());
     m_widget = p_widget;
-    m_widget->show();
+    if (m_widget) {
+        layout()->addWidget(m_widget.data());
+        m_widget->show();
+    }
 
     updateGeometryToContents();
 }

@@ -164,7 +164,8 @@ void UnitedEntry::activateUnitedEntry()
     m_lineEdit->selectAll();
     m_lineEdit->setFocus();
 
-    m_processTimer->start();
+    m_processTimer->stop();
+    processInput();
 }
 
 void UnitedEntry::deactivateUnitedEntry()
@@ -324,11 +325,6 @@ void UnitedEntry::processInput()
     m_hasPending = false;
 
     if (!m_activated) {
-        return;
-    }
-
-    if (m_iconAction->menu()->isVisible()) {
-        // Do not display the popup which will hide the menu.
         return;
     }
 
